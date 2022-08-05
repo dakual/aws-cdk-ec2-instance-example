@@ -1,17 +1,19 @@
-// import * as cdk from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import * as SimpleEc2 from '../lib/simple-ec2-stack';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as SimpleEc2 from '../lib/simple-ec2-stack';
 
-// example test. To run these tests, uncomment this file along with the
+
+// example test. To run these tests
 // example resource in lib/simple-ec2-stack.ts
-test('SQS Queue Created', () => {
-//   const app = new cdk.App();
-//     // WHEN
-//   const stack = new SimpleEc2.SimpleEc2Stack(app, 'MyTestStack');
-//     // THEN
-//   const template = Template.fromStack(stack);
+test('Check InstanceType and SSH KeyName', () => {
+  const app   = new cdk.App();
+  const stack = new SimpleEc2.SimpleEc2Stack(app, 'MyTestStack');
 
-//   template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::EC2::Instance', {
+    InstanceType: 't2.micro',
+    KeyName: 'mykey'
+  });
+
 });
+
